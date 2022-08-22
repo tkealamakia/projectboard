@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/board")
@@ -32,5 +33,16 @@ public class ProjectTaskController {
     }
     ProjectTask newTask = projectTaskService.saveOrUpdateProjectTask(projectTask);
     return new ResponseEntity<ProjectTask>(newTask, HttpStatus.CREATED);
+  }
+
+  @GetMapping("/all")
+  public Iterable<ProjectTask> getAllProjectTasks() {
+    return projectTaskService.findAll();
+  }
+
+  @GetMapping("/{pt_id}")
+  public ResponseEntity<?> getProjectTaskById(@PathVariable Long pt_id) {
+    Optional<ProjectTask> projectTask = projectTaskService.findById(pt_id);
+    return new ResponseEntity<>(projectTask.get(), HttpStatus.OK);
   }
 }
