@@ -18,6 +18,12 @@ public class ProjectTask {
   private String acceptanceCriteria;
   private String status;
 
+  public ProjectTask(String summary, String acceptanceCriteria, String status) {
+    this.summary = summary;
+    this.acceptanceCriteria = acceptanceCriteria;
+    this.status = status;
+  }
+
   public ProjectTask() {}
 
   public Long getId() {
